@@ -1,0 +1,9 @@
+const scanned = JSON.parse(qrData);
+const today = new Date().toISOString().split("T")[0];
+
+let status;
+if(today >= scanned.validFrom && today <= scanned.validTill) {
+  status = "VALID";
+} else {
+  status = "EXPIRED";
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Amusement Park Management System</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Full screen background */
+        .hero {
+            height: 100vh;
+            background-image: url("https://t4.ftcdn.net/jpg/02/23/90/51/360_F_223905110_hlGKFlIv9JBr0DZMYt838ziSx7SiS8Kz.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+
+        /* Light overlay (keeps image clear) */
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        /* Top Navbar */
+        .navbar {
+            position: relative;
+            z-index: 2;
+            background-color: rgba(10, 121, 211, 0.9);
+            color: white;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .navbar ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .navbar ul li {
+            margin-left: 20px;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .navbar ul li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Welcome Text */
+        .welcome {
+            position: relative;
+            z-index: 2;
+            height: calc(100vh - 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .welcome h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.8);
+        }
+
+        .welcome p {
+            font-size: 20px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+        }
+
+        /* Main Content */
+        .container {
+            padding: 30px;
+            background-color: #f4f6f8;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 28px;
+            font-weight: bold;
+            color: #1e88e5;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Hero Section -->
+    <div class="hero">
+
+        <!-- Navbar -->
+        <div class="navbar">
+            <div class="logo">🎡 Amusement Park</div>
+            <ul>
+                <li><a href="Home.html">Home</a></li>
+                <li><a href="booking.html">Booking</a></li>
+                <li><a href="ticket.html">Tickets</a></li>
+                <li><a href="#">Staff</a></li>
+                <li><a href="#">Reports</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </div>
+
+        <!-- Welcome Message -->
+        <div class="welcome">
+            <div>
+                <h1>Welcome to Amusement Park</h1>
+                <p>Manage rides, tickets, staff, and reports efficiently</p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Dashboard Section -->
+    <div class="container">
+        <div class="cards">
+            <div class="card">
+                <h3>Total Rides</h3>
+                <p>25</p>
+            </div>
+            <div class="card">
+                <h3>Visitors Today</h3>
+                <p>1,240</p>
+            </div>
+            <div class="card">
+                <h3>Tickets Sold</h3>
+                <p>980</p>
+            </div>
+            <div class="card">
+                <h3>Staff On Duty</h3>
+                <p>45</p>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 Amusement Park Management System</p>
+        </footer>
+    </div>
+
+</body>
+</html>
