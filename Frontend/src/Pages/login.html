@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Park Registration</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #cfc8c8;
+        }
+
+        .form-container {
+            width: 400px;
+            margin: 50px auto;
+            background: #ded5df;
+            padding: 25px;
+            border-radius: 8px;
+
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .gender-group input {
+            width: auto;
+        }
+
+        .gender-group label {
+            display: inline;
+            margin-right: 10px;
+            font-weight: normal;
+        }
+
+        .age-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+
+<body style="background-image: url(https://static2.bigstockphoto.com/6/9/1/large1500/19603847.jpg);">
+
+<div class="form-container">
+    <h1>LOGIN TO THEME PARK</h1>
+
+    <form action="home.html" method="post">
+
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required placeholder="enter name">
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="enter Email Address" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="enter phone number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Age</label>
+            <div class="age-group">
+                <input type="range" id="age" name="age" min="1" max="99" value="50"
+                       oninput="ageVal.value=value">
+                <output id="ageVal">50</output>
+            </div>
+        </div>
+
+        <div class="form-group gender-group">
+            <label>Gender</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+
+            <input type="radio" id="other" name="gender" value="other">
+            <label for="other">Other</label>
+        </div>
+        <br>
+
+        <div class="rides">
+            <label for="ride">Choose your ride</label>
+            <input type="text" list="rides" name="" id="" placeholder="choose a ride">
+            <datalist id="rides">
+                <option value="Roller Coaster"></option>
+                <option value="Drop Tower"></option>
+                <option value="Log Flume"></option>
+                <option value="Water Slide"></option>
+                <option value="Ferris Wheel"></option>
+                <option value="Dark Ride"></option>
+                <option value="Scrambler"></option>
+                <option value="Bumper Cars"></option>
+                <option value="Bungee Swings"></option>
+                <option value="Carousel"></option>
+            </datalist>
+        </div>
+<br>
+        <div class="form-group">
+            <label for="address">Address</label>
+            <textarea id="address" name="address" rows="4"
+                      placeholder="House No, Street, City, State, Pincode"></textarea>
+        </div>
+        <br>
+        <label for="pay">Payment</label>
+        <br>
+        <a href="https://pay.google.com/intl/en_in/about/" target="_blank" >
+    Pay Now
+</a>
+<br>
+<br>
+
+        <br>
+        <label for="yes">Type YES to submit</label>
+        <input type="text" pattern="[A-Z]{3}" name="" id="" required placeholder="YES or any three uppercase character">
+        <br>
+        <br>
+        <button type="submit">Submit</button>
+
+    </form>
+</div>
+
+</body>
+</html>
