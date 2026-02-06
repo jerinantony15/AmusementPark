@@ -1,191 +1,170 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Amusement Park Management System</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amusement Park</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-        }
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="C:\Users\student\Downloads\AmusementParkManagementSystem\Frontend\src\Images\fair-ground_17343707.png" />
 
-        /* Full screen background */
-        .hero {
-            height: 100vh;
-            background-image: url("https://t4.ftcdn.net/jpg/02/23/90/51/360_F_223905110_hlGKFlIv9JBr0DZMYt838ziSx7SiS8Kz.jpg");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            position: relative;
-        }
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="ThrillWorld is a virtual theme park with thrilling rides and themed zones.">
+  <meta name="keywords" content="theme park, thrillworld, rides, virtual park">
+  <meta name="author" content="Jerin">
 
-        /* Light overlay (keeps image clear) */
-        .hero::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            width: 100%;
-            background-color: rgba(0, 0, 0, 0.2);
-        }
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
-        /* Top Navbar */
-        .navbar {
-            position: relative;
-            z-index: 2;
-            background-color: rgba(10, 121, 211, 0.9);
-            color: white;
-            padding: 15px 30px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-        .navbar .logo {
-            font-size: 22px;
-            font-weight: bold;
-        }
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        .navbar ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-        }
+  <!-- Custom CSS -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-        .navbar ul li {
-            margin-left: 20px;
-        }
+    body {
+      font-family: 'Poppins', 'Segoe UI', sans-serif;
+    }
 
-        .navbar ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-        }
+    /* Navbar */
+    .nav-link.active {
+      color: #f9d423 !important;
+      font-weight: bold;
+    }
 
-        .navbar ul li a:hover {
-            text-decoration: underline;
-        }
+    .navbar.scrolled {
+      background-color: rgba(33, 37, 41, 0.9) !important;
+      transition: background-color 0.3s ease;
+    }
 
-        /* Welcome Text */
-        .welcome {
-            position: relative;
-            z-index: 2;
-            height: calc(100vh - 70px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 20px;
-        }
+    /* Hero Section */
+    .header-section {
+      height: 100vh;
+      background: url('https://seoulinspired.com/wp-content/uploads/Everland-Ferris-Wheel.jpg')
+        no-repeat center center;
+      background-size: cover;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
 
-        .welcome h1 {
-            font-size: 48px;
-            margin-bottom: 10px;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.8);
-        }
+    .header-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.4);
+      z-index: 0;
+    }
 
-        .welcome p {
-            font-size: 20px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-        }
+    .header-section > * {
+      position: relative;
+      z-index: 1;
+    }
 
-        /* Main Content */
-        .container {
-            padding: 30px;
-            background-color: #f4f6f8;
-        }
+    /* Glow Text */
+    .glow-text {
+      color: #fff;
+      text-shadow:
+        0 0 10px #fff,
+        0 0 20px #ff4e50,
+        0 0 30px #ff4e50,
+        0 0 40px #f9d423;
+      animation: pulseGlow 2s infinite alternate;
+    }
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-        }
+    @keyframes pulseGlow {
+      from {
+        text-shadow: 0 0 5px #fff, 0 0 10px #ff4e50;
+      }
+      to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff4e50;
+      }
+    }
 
-        .card {
-            background-color: white;
-            padding: 25px;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
+    /* Glow Button */
+    .glow-button {
+      border: 2px solid white;
+      box-shadow: 0 0 12px #fff, 0 0 20px #f9d423;
+      transition: 0.3s ease;
+    }
 
-        .card h3 {
-            color: #555;
-            margin-bottom: 10px;
-        }
+    .glow-button:hover {
+      background-color: #fff;
+      color: #ff4e50;
+      box-shadow: 0 0 24px #f9d423, 0 0 48px #ff4e50;
+    }
 
-        .card p {
-            font-size: 28px;
-            font-weight: bold;
-            color: #1e88e5;
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 30px;
-            color: #777;
-        }
-    </style>
+    /* Weather Widget */
+    .weather-widget {
+      background: linear-gradient(135deg, #74b9ff, #0984e3);
+      color: white;
+      padding: 15px;
+      border-radius: 10px;
+      text-align: center;
+    }
+  </style>
 </head>
 
 <body>
 
-    <!-- Hero Section -->
-    <div class="hero">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">🎢 Theme Park - Now at Madurai</a>
 
-        <!-- Navbar -->
-        <div class="navbar">
-            <div class="logo">🎡 Amusement Park</div>
-            <ul>
-                <li><a href="Home.html">Home</a></li>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="booking.html">Booking</a></li>
-                <li><a href="ticket.html">Tickets</a></li>
-                <li><a href="Contact.html">Contacts</a></li>
-                <li><a href="Review.html">Reviews</a></li>
-                <li><a href="Logout.html">Logout</a></li>
-            </ul>
-        </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-        <!-- Welcome Message -->
-        <div class="welcome">
-            <div>
-                <h1>Welcome to Amusement Park</h1>
-                <p>Manage rides, tickets, staff, and reports efficiently</p>
-            </div>
-        </div>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="Home.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="booking.html">Booking</a></li>
+          <li class="nav-item"><a class="nav-link" href="Review.html">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="Contact.html ">Contact</a></li>
+        </ul>
+      </div>
+      
+    </div>
+  </nav>
 
+  <!-- Hero Section -->
+  <header id="home"
+    class="header-section d-flex flex-column justify-content-center align-items-center text-white text-center">
+
+    <h1 class="display-2 fw-bold glow-text">🎢 Amusement Park</h1>
+    <marquee scrollamount="15" behavior="" direction="right"><p class="lead mt-3">
+      India's Premier Virtual Theme Park – Packed with thrilling adventures
+    </p>
+    </marquee>
+
+    <div class="mt-3">
+      <span class="badge bg-light text-dark me-2">🎫 Over 50 Rides</span>
+      <span class="badge bg-light text-dark me-2">🌟 4.8/5 Rating</span>
+      <span class="badge bg-light text-dark">🏆 Award Winner 2024</span>
     </div>
 
-    <!-- Dashboard Section -->
-    <div class="container">
-        <div class="cards">
-            <div class="card">
-                <h3>Total Rides</h3>
-                <p>25</p>
-            </div>
-            <div class="card">
-                <h3>Visitors Today</h3>
-                <p>1,240</p>
-            </div>
-            <div class="card">
-                <h3>Tickets Sold</h3>
-                <p>980</p>
-            </div>
-            <div class="card">
-                <h3>Staff On Duty</h3>
-                <p>45</p>
-            </div>
-        </div>
+    <a href="login.html" class="btn btn-outline-light mt-4 btn-lg fw-bold glow-button">
+      🎠 Start Exploring
+    </a>
 
-        <footer>
-            <p>© 2026 Amusement Park Management System</p>
-        </footer>
+    <!-- Weather Widget -->
+    <div class="weather-widget mt-4">
+      <div>🌤️ Perfect Weather for Fun!</div>
+      <div>28°C | Partly Cloudy | Wind: 5 km/h</div>
     </div>
+
+  </header>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>
