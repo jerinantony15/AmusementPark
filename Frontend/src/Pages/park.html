@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Park Management</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body{
+    font-family:'Poppins',sans-serif;
+    background:url('https://blog.ipleaders.in/wp-content/uploads/2021/08/Theme_park_AdobeStock_222547272_1.jpg') no-repeat center center/cover;
+    margin:0;
+    color:white;
+}
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.75);
+    z-index:-1;
+}
+.container{
+    width:550px;
+    margin:40px auto;
+    background:rgba(30,30,30,0.92);
+    padding:25px;
+    border-radius:10px;
+    border:1px solid #444;
+}
+h2{ text-align:center; color:#f9d423; }
+h3{ color:#f9d423; margin-top:20px; }
+label{ display:inline-block; width:100px; margin-top:10px; }
+input{
+    padding:7px; width:60%;
+    background:#2a2a2a; border:1px solid #444;
+    color:white; border-radius:5px;
+}
+button{
+    background:#f9d423; border:none;
+    padding:7px 14px; font-weight:bold;
+    border-radius:5px; cursor:pointer; margin-top:10px;
+}
+button:hover{ background:#ffb703; }
+ul{ list-style:none; padding:0; }
+li{
+    background:#2a2a2a;
+    margin-top:8px; padding:8px;
+    border-left:4px solid #f9d423;
+}
+.msg{ font-weight:bold; margin-top:8px; }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<h2>🌳 Park Management</h2>
+
+<button onclick="loadParks()">📂 Load Parks</button>
+
+<h3>➕ Add Park</h3>
+<label>Name:</label>
+<input type="text" id="name"><br>
+<label>Location:</label>
+<input type="text" id="location"><br>
+<button onclick="addPark()">Add Park</button>
+<p id="addMsg" class="msg"></p>
+
+<h3>🔍 Search Park</h3>
+<label>Name / ID:</label>
+<input type="text" id="search">
+<button onclick="searchPark()">Search</button>
+
+<h3>📋 Park List</h3>
+<ul id="parks"></ul>
+</div>
+
+<script>
+var parks=[];
+
+// LOAD parks from JSON
+function loadParks(){
+ fetch("parks.json")
+ .then(response => response.json())
+ .then(data => {
+    parks=data.parks;
+    display(parks,"All Parks");
+ });
+}
+
+// DISPLAY parks
+function display(list,title){
+ var ul=document.getElementById("parks");
+ ul.innerHTML="<li><b>"+title+"</b></li>";
+ for(var i=0;i<list.length;i++){
+  var li=document.createElement("li");
+  li.innerHTML=list[i].id+" - "+list[i].name+" ("+list[i].location+")";
+  ul.appendChild(li);
+ }
+}
+
+// ADD park (NO POST)
+function addPark(){
+ var name=document.getElementById("name").value.trim();
+ var location=document.getElementById("location").value.trim();
+ var msg=document.getElementById("addMsg");
+
+ if(name=="" || location==""){
+    msg.style.color="#ff4d4d";
+    msg.innerHTML="❌ Fields cannot be empty!";
+ }
+ else{
+    var newPark={
+        id: parks.length>0 ? parks[parks.length-1].id+1 : 1,
+        name:name,
+        location:location
+    };
+
+    parks.push(newPark);          // add to array
+    display(parks,"All Parks");   // refresh list
+
+    msg.style.color="#90ee90";
+    msg.innerHTML="✅ Park Added Successfully";
+
+    document.getElementById("name").value="";
+    document.getElementById("location").value="";
+ }
+}
+
+// SEARCH park
+function searchPark(){
+ var key=document.getElementById("search").value.trim().toLowerCase();
+ var results=[];
+
+ if(key==""){
+    display(parks,"All Parks");
+ }
+ else{
+    for(var i=0;i<parks.length;i++){
+        if(!isNaN(key)){
+            if(parks[i].id==parseInt(key)){
+                results.push(parks[i]);
+            }
+        }
+        else{
+            if(parks[i].name.toLowerCase()==key){
+                results.push(parks[i]);
+            }
+        }
+    }
+
+    if(results.length>0){
+        display(results,"Search Result");
+    }
+    else{
+        var ul=document.getElementById("parks");
+        ul.innerHTML="<li><b>Search Result</b></li><li>❌ No Park Found</li>";
+    }
+ }
+}
+</script>
+
+</body>
+</html>
