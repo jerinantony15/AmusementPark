@@ -76,88 +76,136 @@ li{
 </div>
 
 <script>
+
 var parks=[];
 
-// LOAD parks from JSON
+/* LOAD parks using XMLHttpRequest */
 function loadParks(){
- fetch("parks.json")
- .then(response => response.json())
- .then(data => {
-    parks=data.parks;
-    display(parks,"All Parks");
- });
+
+    var xhr = new XMLHttpRequest();
+
+    xhr.open("GET","parks.json",true);
+
+    xhr.onreadystatechange = function(){
+
+        if(xhr.readyState === 4 && xhr.status === 200){
+
+            var data = JSON.parse(xhr.responseText);
+
+            parks = data.parks;
+
+            display(parks,"All Parks");
+        }
+    };
+
+    xhr.send();
 }
 
-// DISPLAY parks
+
+/* DISPLAY parks */
 function display(list,title){
+
  var ul=document.getElementById("parks");
+
  ul.innerHTML="<li><b>"+title+"</b></li>";
+
  for(var i=0;i<list.length;i++){
+
   var li=document.createElement("li");
+
   li.innerHTML=list[i].id+" - "+list[i].name+" ("+list[i].location+")";
+
   ul.appendChild(li);
  }
 }
 
-// ADD park (NO POST)
+
+/* ADD park */
 function addPark(){
+
  var name=document.getElementById("name").value.trim();
+
  var location=document.getElementById("location").value.trim();
+
  var msg=document.getElementById("addMsg");
 
  if(name=="" || location==""){
+
     msg.style.color="#ff4d4d";
+
     msg.innerHTML="❌ Fields cannot be empty!";
  }
  else{
+
     var newPark={
+
         id: parks.length>0 ? parks[parks.length-1].id+1 : 1,
+
         name:name,
+
         location:location
     };
 
-    parks.push(newPark);          // add to array
-    display(parks,"All Parks");   // refresh list
+    parks.push(newPark);
+
+    display(parks,"All Parks");
 
     msg.style.color="#90ee90";
+
     msg.innerHTML="✅ Park Added Successfully";
 
     document.getElementById("name").value="";
+
     document.getElementById("location").value="";
  }
 }
 
-// SEARCH park
+
+/* SEARCH park */
 function searchPark(){
+
  var key=document.getElementById("search").value.trim().toLowerCase();
+
  var results=[];
 
  if(key==""){
+
     display(parks,"All Parks");
  }
  else{
+
     for(var i=0;i<parks.length;i++){
+
         if(!isNaN(key)){
+
             if(parks[i].id==parseInt(key)){
+
                 results.push(parks[i]);
             }
         }
+
         else{
+
             if(parks[i].name.toLowerCase()==key){
+
                 results.push(parks[i]);
             }
         }
     }
 
     if(results.length>0){
+
         display(results,"Search Result");
     }
     else{
+
         var ul=document.getElementById("parks");
+
         ul.innerHTML="<li><b>Search Result</b></li><li>❌ No Park Found</li>";
     }
  }
 }
+
 </script>
 
 </body>
