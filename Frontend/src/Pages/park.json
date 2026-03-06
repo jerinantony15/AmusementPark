@@ -1,0 +1,10 @@
+ {
+
+    "parks":[
+
+        {"id":1,"name":"Central Park","location":"New York"},
+         {"id":2,"name":"Green Park","location":"London"}, 
+         {"id":3,"name":"City Park","location":"Chennai"}
+          
+    ]
+ }
