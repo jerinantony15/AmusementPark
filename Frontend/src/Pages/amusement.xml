@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<parks>
+
+    <ride>
+        <park>Wonderla</park>
+        <name>Roller Coaster</name>
+        <price>300</price>
+    </ride>
+
+    <ride>
+        <park>Wonderla</park>
+        <name>Water Slide</name>
+        <price>200</price>
+    </ride>
+
+    <ride>
+        <park>Queens Land</park>
+        <name>Giant Wheel</name>
+        <price>150</price>
+    </ride>
+
+    <ride>
+        <park>Queens Land</park>
+        <name>Free Fall</name>
+        <price>250</price>
+    </ride>
+
+    <ride>
+        <park>Dream World</park>
+        <name>Bumper Cars</name>
+        <price>180</price>
+    </ride>
+
+    <ride>
+        <park>Dream World</park>
+        <name>Kids Train</name>
+        <price>100</price>
+    </ride>
+
+</parks>

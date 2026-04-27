@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amusement Park</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.container {
+  height: 100vh;
+  background: url('https://seoulinspired.com/wp-content/uploads/Everland-Ferris-Wheel.jpg') no-repeat center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel {
+  width: 90%;
+  max-width: 1000px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(10px);
+  padding: 25px;
+  border-radius: 15px;
+  color: white;
+  text-align: center;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+select, button, input {
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  margin: 5px;
+}
+
+button {
+  background: #ff4e50;
+  color: white;
+  cursor: pointer;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.card {
+  background: white;
+  color: black;
+  padding: 15px;
+  width: 220px;
+  border-radius: 10px;
+}
+
+#booking {
+  display: none;
+  margin-top: 15px;
+  background: rgba(255,255,255,0.1);
+  padding: 10px;
+  border-radius: 10px;
+}
+</style>
+
+<script>
+let selectedPrice = 0;
+let selectedRide = "";
+let selectedPark = "";
+
+function loadXML() {
+  let xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      showRides(this);
+    }
+  };
+  xhttp.open("GET", "amusement.xml", true);
+  xhttp.send();
+}
+
+function showRides(xml) {
+  let xmlDoc = xml.responseXML;
+  let rides = xmlDoc.getElementsByTagName("ride");
+
+  selectedPark = document.getElementById("park").value.trim();
+  let result = document.getElementById("result");
+  result.innerHTML = "";
+
+  let found = false;
+
+  for (let i = 0; i < rides.length; i++) {
+    let park = rides[i].getElementsByTagName("park")[0].textContent.trim();
+
+    if (park === selectedPark) {
+      found = true;
+
+      let name = rides[i].getElementsByTagName("name")[0].textContent;
+      let price = rides[i].getElementsByTagName("price")[0].textContent;
+
+      result.innerHTML += `
+      <div class="card">
+        <h3>${name}</h3>
+        <p>₹${price}</p>
+        <button onclick="bookNow('${name}',${price})">Book</button>
+      </div>`;
+    }
+  }
+
+  if (!found) {
+    result.innerHTML = "<h3>No rides available in this park</h3>";
+  }
+}
+
+function bookNow(name, price) {
+  selectedRide = name;
+  selectedPrice = price;
+
+  document.getElementById("booking").style.display = "block";
+  document.getElementById("details").innerHTML =
+    "Ride: " + name + "<br>Park: " + selectedPark + "<br>Price: ₹" + price;
+}
+
+function calculate() {
+  let persons = document.getElementById("persons").value;
+  let total = persons * selectedPrice;
+  document.getElementById("total").innerHTML = "Total: ₹" + total;
+}
+
+function confirmBooking() {
+  let persons = document.getElementById("persons").value;
+  let totalText = document.getElementById("total").innerText;
+
+  alert(
+    "Booking Confirmed 🎡\n\n" +
+    "Ride: " + selectedRide + "\n" +
+    "Park: " + selectedPark + "\n" +
+    "Persons: " + persons + "\n" +
+    totalText
+  );
+
+  document.getElementById("booking").style.display = "none";
+  document.getElementById("result").innerHTML = "";
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+  <div class="panel">
+
+    <h1>🎢 Amusement Park</h1>
+    <p>India's Premier Theme Park Experience</p>
+
+    <select id="park">
+      <option value="">Select Park</option>
+      <option value="Wonderla">Wonderla</option>
+      <option value="Queens Land">Queens Land</option>
+      <option value="Dream World">Dream World</option>
+      <option value="Fun Land">Fun Land</option>
+      <option value="Magic Park">Magic Park</option>
+    </select>
+
+    <button onclick="loadXML()">Search</button>
+
+    <div class="cards" id="result"></div>
+
+    <div id="booking">
+      <h3>Booking</h3>
+      <p id="details"></p>
+      <input type="number" id="persons" placeholder="Persons">
+      <button onclick="calculate()">Total</button>
+      <p id="total"></p>
+      <button onclick="confirmBooking()">Confirm</button>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
